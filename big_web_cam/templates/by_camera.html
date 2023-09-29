@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+{% extends 'index.html' %}
+{% block content %}
+    <h2>Камерa №{{ current_camera.id }}:</h2>
+    <div>
+        <p>Статус камеры: {{ current_camera.is_ok }}</p>
+        <p>Наличие свободных мест: {{ current_camera.is_availiable_places }}</p>
+        <p>Описание положения камеры: {{current_camera.description}}</p>
+	<img src="{% url 'sub_index' %}" width="640" height="480"> </img>
+    </div>
+{% endblock %}

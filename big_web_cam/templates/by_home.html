@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+{% extends 'index.html' %}
+{% block content %}
+    <h2>Дом: {{ current_home.city }} {{ current_home.street }} {{ current_home.house_number }}</h2>
+    <p>Камеры на доме:</p>
+    {% for camera in cameras %}
+    <div>
+        <li><p><a href="/camera/{{ camera.pk }}"> Камера №{{ camera.id }} {{ camera.description }}</a></p></li>
+    </div>
+    {% endfor %}
+{% endblock %}

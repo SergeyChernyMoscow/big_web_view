@@ -1,0 +1,67 @@
+
+{% load bootstrap4 %}
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name = 'viewport'
+    content = 'width = device-width, initial-scale = 1, shrink-to-fit = no'>
+    <title>{% block title %} Сервис Big-View {% endblock %}</title>
+    {% bootstrap_css %}
+    <link rel = 'stylesheet' type = 'text/css'
+    href = "{% static 'style.css' %}">
+    {% bootstrap_javascript jquery='slim' %}
+    <link rel="icon" href="{% static 'icons8-камера-flaticons-lineal-color-96.png' %}" size="32x32">
+</head>
+<body class = 'container-fluid'>
+    <header class = 'mb-2'>
+        <h3 class = 'display-1 text-center'>Big-View</h3>
+    </header>
+    <div class = 'row'>
+        <ul class="col nav justify-content-center">
+            <li class = 'nav-item'><a class = 'nav-link'
+                                      href="{% url 'register' %}">Регистрация</a></li>
+            {% if user.is_authenticated %}
+            <li class='nav-item dropdown'>
+                <a class='nav-link dropdown-toggle'
+                   data-toggle = 'dropdown'
+                   href='#' role = 'button' aria-haspopup='true'
+                   aria-expanded="false">Профиль</a>
+                <div class = 'dropdown-menu'>
+                    <a class="dropdown-item" href="{% url 'profile' %}">Мои адреса</a>
+                    <a class="dropdown-item" href="{% url 'profile_change' %}">Изменить личные данные</a>
+                    <a class="dropdown-item" href="{% url 'password_change' %}">Изменить пароль</a>
+                    <div class="dropdown-divider"></div>
+                    <a class = 'dropdown-item' href="{% url 'logout' %}">Выйти</a>
+                    <div class="dropdown-divider"></div>
+                    <a class = 'dropdown-item' href="{% url 'profile_delete' %}">Удалить</a>
+                </div>
+            </li>
+            {% else %}
+            <li class="nav-item"><a class="nav-link" href="{% url 'login' %}">Вход</a></li>
+            {% endif %}
+        </ul>
+    </div>
+    <div class="row">
+        <nav class="col-md-auto nav flex-column border">
+            <a class="nav-link root"
+               href="{% url 'other' page='about' %}">О сайте</a>
+            <a class="nav-link root"
+               href="{% url 'index' %}">Главная</a>
+        </nav>
+        <section class="col border py-2">
+            {% block content %}
+            {% bootstrap_messages %}
+            <h2>Все подключенные адреса</h2>
+            {% for home in homes %}
+               <li><a>{{ home.city }} {{ home.street }} {{ home.house_number }}</a></li>
+            {% endfor %}
+            {% endblock %}
+        </section>
+    </div>
+    <footer class="mt-3">
+        <p class="text-right font-italic">&copy;OT_Che, 2023.</p>
+    </footer>
+</body>
+</html>

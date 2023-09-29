@@ -1,0 +1,8 @@
+header h1{
+    background: url('camera_1.png') left/auto 100% no-repeat,
+    url('camera_2.png') right/auto 100% no-repeat;
+}
+
+.root {
+    font-size: larger;
+}

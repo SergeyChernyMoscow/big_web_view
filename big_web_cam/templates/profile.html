@@ -1,0 +1,17 @@
+{% extends 'index.html' %}
+{% load bootstrap4 %}
+{% block title %}Профиль пользователя{% endblock %}
+{% block content %}
+{% csrf_token %}
+<h2>Профиль пользователя {{user.username}}</h2>
+{% if user.first_name and user.last_name %}
+<p>Добрый день, {{user.first_name}} {{user.last_name}} !<br></p>
+{% else %}
+<p>Добрый день!</p>
+{% endif %}
+<h3>Ваши адреса и камеры</h3>
+{% bootstrap_messages %}
+{% for home in homes %}
+<li><a href="/{{ home.pk }}/">{{ home.city }} {{ home.street }} {{ home.house_number }}</a></li>
+{% endfor %}
+{% endblock %}
